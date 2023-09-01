@@ -1,0 +1,20 @@
+{
+	"luci-app-example": {
+		"description": "Grant access to Example config",
+		"read": {
+			"uci": ["example", "example_helper"],
+
+			"ubus": {
+				"system": ["*"]
+			},
+
+			"file": {
+				"/tmp/example.txt": ["read", "write", "exec"]
+			}
+		},
+
+		"write": {
+			"uci": ["example", "example_helper"]
+		}
+	}
+}

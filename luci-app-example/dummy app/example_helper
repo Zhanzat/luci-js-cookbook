@@ -1,0 +1,16 @@
+
+config some_choice
+	option id '4364'
+	option name 'White'
+
+config some_choice
+	option id '1234'
+	option name 'Red'
+
+config some_choice
+	option id '4231'
+	option name 'Green'
+
+config some_choice
+	option id '4321'
+	option name 'Blue'

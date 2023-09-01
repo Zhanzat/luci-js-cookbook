@@ -1,0 +1,7 @@
+
+config first_section
+	option some_bool '1'
+	option some_address '172.19.100.43'
+	option some_file_dir '/tmp/example.txt'
+	option multi_choice 'White'
+
