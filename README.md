@@ -121,7 +121,7 @@ config some_choice
   ```
 
 ### Creating a form
-Let's map the **example** configuration file
+The following code maps the **example** configuration file
 
   ```js
 'use strict';
@@ -147,6 +147,48 @@ return L.view.extend({
     }
 });
   ```
+This code is essentially defining a configuration form with two options: a checkbox option *('some_bool')* and a select element *('some_choice')* with two choices *('The first choice' and 'The second choice')*. The form is organized into sections, and the entire form is rendered when the 'render' function is called. The configuration data collected through this form is typically used to configure settings in the '/etc/config/example' configuration file. <br/>
+Let's break down the code step by step:
+  <ol> 	  
+    <li>
+	    
+**'use strict'** is a JavaScript directive that enforces a stricter set of rules and prevents certain common programming mistakes. With strict mode, you can not, for example, use undeclared variables. [Strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 
+    </li> 
+    <li>
+    
+**'require form'**: This line is importing the form module, which is part of the LuCI framework. The form module provides functionality for creating configuration forms.      
+    </li>  
+    <li>
+
+**return L.view.extend({ ... })**: This code defines a LuCI view by extending the 'L.view' class. In LuCI, views are used to display and manage different parts of the web interface, such as configuration pages.    
+    </li>  
+    <li>
+
+Inside the **render** function, the following code creates a configuration form:
+	<ul>
+     	     <li>
+	   **var m, s, o**: Declares three variables, 'm', 's', and 'o', which will be used to create and configure the form, form sections, and form options.
+    	     </li>
+	     <li>
+	   **m = new form.Map('example', 'Example form')**: Creates a new instance of a form map with the name 'example' and the title 'Example form'. The form map is essentially the top-level container for all sections and options in the form.
+    	     </li>
+     	     <li>
+	   **s = m.section(form.TypedSection, 'first_section', 'The first section', ...)**: Creates a new form section within the form map 'm'. This section is named 'first_section' and has a title 'The first section'. The section appears to be associated with a configuration section named 'config example first_section' in the '/etc/config/example' configuration file.
+    	     </li>
+     	     <li>
+	   **o = s.option(form.Flag, 'some_bool', 'A checkbox option')**: Adds an option of type 'Flag' (likely a boolean checkbox) to the section 's'. This option is named 'some_bool' and has the label 'A checkbox option'.
+    	     </li>
+     	     <li>
+	   **o = s.option(form.ListValue, 'some_choice', 'A select element')**: Adds another option of type 'ListValue' (likely a dropdown/select element) to the same section 's'. This option is named 'some_choice' and has the label 'A select element'.
+    	     </li>
+ 	</ul>
+    </li>
+    <li>
+
+**return m.render();** is used to render the entire form map 'm' along with its sections and options, and the rendered form is returned.   
+    </li> 
+  </ol>
+
 <img src="images/initial_view.png" alt="Logo" width="auto" height="auto" align="center">
 
 ### ListValue
