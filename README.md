@@ -356,10 +356,8 @@ function showCurrentTime() {
   ```
 Before calling m.render function
   ```js
-        $(document).ready(function () {
-            var pollfunction = L.bind(showCurrentTime, this);
-            poll.add(pollfunction, 1);
-        });
+   var pollfunction = L.bind(showCurrentTime, this);
+   poll.add(pollfunction, 1);
   ```
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
