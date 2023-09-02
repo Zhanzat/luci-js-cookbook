@@ -26,11 +26,11 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#prerequisites">Framework Overview</a></li>
+        <li><a href="#overview">Framework Overview</a></li>
       </ul>
     </li>
     <li>
-      <a href="#writingapp">Writing an LuCI App</a>
+      <a href="#writingapp">Writing a LuCI App</a>
       <ul>
         <li><a href="#settingapp">Setting up</a></li>
         <li><a href="#form">Creating a form</a></li>
@@ -71,15 +71,47 @@ To get a local copy up and running follow these simple example steps.
 This is an example of how to list things you need to use the software and how to install them.
 * npm
 
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- Framework Overview -->
 ### Framework overview
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- Writing App -->
+## Writing an LuCI App
+
+### Setting up
+
+### Creating a form
+<img src="images/initial_view.png" alt="Logo" width="auto" height="auto" align="center">
+
+### ListValue
+<img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
+
+### MultiValue
+<img src="images/multivalue.png" alt="Logo" width="auto" height="auto" align="center">
+
+### Ping button and ui.ping
+<img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
+<img src="images/ping_btn_action.png" alt="Logo" width="auto" height="auto" align="center">
+
+### fs.read + ui.showModal
+<img src="images/read_file.png" alt="Logo" width="auto" height="auto" align="center">
+<img src="images/read_file_modal.png" alt="Logo" width="auto" height="auto" align="center">
+
+### rpc call
+<img src="images/boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
+
+### uci set changes
+<img src="images/multivalue_set_default.png" alt="Logo" width="auto" height="auto" align="center">
+<img src="images/multivalue_set_default_action.png" alt="Logo" width="auto" height="auto" align="center">
+<img src="images/multivalue_set_default_after.png" alt="Logo" width="auto" height="auto" align="center">
+
+### Dynamic page
+<img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
