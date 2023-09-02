@@ -68,8 +68,34 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+LuCI apps are typically developed for embedded Linux systems like routers, so you'll need access to such a system for testing and deployment. Here are the prerequisites and steps to get started:
+  <ol>
+    <li>
+      Setup OpenWrt Environment:
+      <ul>
+        <li>You need access to an OpenWrt-based device, such as a router or a virtual machine running OpenWrt.</li>
+        <li>Make sure you can SSH into your OpenWrt device and have basic knowledge of Linux commands.</li>
+      </ul>
+    </li>
+    <li>
+      LuCI Installed:
+      <ul>
+        <li>Ensure that LuCI (Luci web interface) is installed on your OpenWrt device. It is usually included in the default OpenWrt firmware.</li>
+      </ul>
+    </li>
+    <li>
+      Web Development Tools:
+      <ul>
+        <li>You'll need a text editor or Integrated Development Environment (IDE) for coding JavaScript. Popular choices include Visual Studio Code, Sublime Text, or even simple editors like Notepad++.</li>
+      </ul>
+    </li>
+    <li>
+      Basic JavaScript and Web Development Knowledge
+    </li>
+    <li>
+      Familiarity with OpenWrt and LuCI
+    </li>
+  </ol>
 
 <!-- Framework Overview -->
 ### Framework overview
