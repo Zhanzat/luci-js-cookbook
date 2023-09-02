@@ -76,6 +76,7 @@ This is an example of how to list things you need to use the software and how to
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+<img src="images/folder_structure.png" alt="Logo" width="auto" height="auto" align="center">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
