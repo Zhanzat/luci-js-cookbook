@@ -102,7 +102,7 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
-<img src="images/folder_structure.png" alt="Logo" width="auto" height="auto" align="center">
+Do I really need this section?
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
