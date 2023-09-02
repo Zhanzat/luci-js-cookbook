@@ -50,6 +50,7 @@
 
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
+LuCI JavaScript-API renders views on the client side, resulting in accelerated performance of the Web interface and offering developers more convenient tools for web interface creation.
 This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
