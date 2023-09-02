@@ -23,11 +23,7 @@
       <a href="#about-the-project">LuCI App Preview</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#overview">Framework Overview</a></li>
-      </ul>
+      <a href="#prerequisites">Prerequisites</a>
     </li>
     <li>
       <a href="#writingapp">Writing a LuCI App</a>
@@ -60,13 +56,8 @@ This tutorial will demonstrate how to create a simple LuCI form view using the J
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
+<!-- Prerequisites -->
+## Prerequisites
 
 LuCI apps are typically developed for embedded Linux systems like routers, so you'll need access to such a system for testing and deployment. Here are the prerequisites and steps to get started:
   <ol>
@@ -96,13 +87,6 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
       Familiarity with OpenWrt and LuCI
     </li>
   </ol>
-
-<!-- Framework Overview -->
-### Framework overview
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-Do I really need this section?
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
