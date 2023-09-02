@@ -76,7 +76,7 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
       </ul>
     </li>
     <li>
-      Web Development Tools:
+      Development Tools:
       <ul>
         <li>You'll need a text editor or Integrated Development Environment (IDE) for coding JavaScript. Popular choices include Visual Studio Code, Sublime Text, or even simple editors like Notepad++.</li>
       </ul>
