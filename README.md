@@ -39,7 +39,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="images/current_time.png" alt="Logo" width="90%" height="auto" align="center">
+<img src="images/current_time.png" alt="Logo" width="auto height="auto" align="center">
 
 This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API
 
