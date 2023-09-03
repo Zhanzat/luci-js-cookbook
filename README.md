@@ -30,7 +30,7 @@
       <ul>
         <li><a href="#settingapp">Setting up</a></li>
         <li><a href="#form">Creating a form</a></li>
-        <li><a href="#listvalue">ListValue</a></li>
+        <li><a href="#listvalue">Loading more data</a></li>
         <li><a href="#multivalue">MultiValue</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
         <li><a href="#readfile">fs.read + ui.showModal</a></li>
@@ -198,17 +198,19 @@ Inside the **render** function, the following code creates a configuration form:
 **return m.render();** is used to render the entire form map 'm' along with its sections and options, and the rendered form is returned.   
     </li> 
   </ol>
-
+  <br/>
+  
+To access the LuCI web interface enter the IP address of your OpenWRT in a web browser. Example: **http://192.168.1.1** 
+<br/><br/>
 <img src="images/initial_view.png" alt="Logo" width="auto" height="auto" align="center">
 
-### ListValue
-Let's read values for ListValue from **example_helper**
+### Loading more data
+Let's read values for ListValue from **example_helper** .
+<br/><br/>
+You can load UCI configuration data using the **uci** module before **render** function:
 
   ```js
-'use strict';
-'require form';
-'require uci';
-
+//..
 return L.view.extend({
     load: function () {
         return Promise.all([
@@ -216,26 +218,29 @@ return L.view.extend({
         ]);
     },
     render: function () {   
-        var m, s, o;
-
-        m = new form.Map('example', 'Example form');
-        
-            s = m.section(form.TypedSection, 'first_section', 'The first section',
-            'This sections maps "config example first_section" of /etc/config/example');
-        
-        o = s.option(form.Flag, 'some_bool', 'A checkbox option');
-        
+        //..
         o = s.option(form.ListValue, 'some_choice', 'A select element');
 
         var choiceList = uci.sections('example_helper', 'some_choice')
-
         choiceList.forEach(choice => o.value(choice['id'], choice['name']));
 
         return m.render()
     }
 });
   ```
-To access the LuCI web interface enter the IP address of your OpenWRT in a web browser. Example: **http://192.168.1.1**
+<br/>
+<ul>
+	<li>
+		
+**load**: This function is used to load configuration data before rendering the form. It returns a Promise that resolves when the data is loaded.
+	</li>
+	<li>
+**uci.sections('example_helper', 'some_choice')**: Retrievs a list of sections of type *'some_choice'* from the *'example_helper'*
+ 	</li>
+</ul>
+
+<br/>
+
 <img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
 
 ### MultiValue
