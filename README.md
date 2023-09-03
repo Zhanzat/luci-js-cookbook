@@ -35,6 +35,8 @@
         <li><a href="#custom-form-widget">Custom form widget</a></li>
         <li><a href="#rpc-communication">RPC Communication</a></li>
         <li><a href="#view-control">View control</a></li>
+	<li><a href="#changing-uci-configuration-and-applying-changes">Changing UCI configuration and applying changes</a></li>
+	<li><a href="#poll-actions">Poll actions</a></li>
       </ul>
     </li>
  
@@ -49,7 +51,7 @@
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
 LuCI JavaScript-API renders views on the client side, resulting in accelerated performance of the Web interface and offering developers more convenient tools for web interface creation.
-This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API
+This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API. Throughout this tutorial, it is recommended referring to the (API Reference)[https://openwrt.github.io/luci/jsapi/] for comprehensive details on the mentioned functions and classes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,7 +89,7 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
     </li>
   </ol>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
 
 
 <!-- Writing App -->
@@ -201,7 +203,9 @@ Inside the **render** function, the following code creates a configuration form:
 To access the LuCI web interface enter the IP address of your OpenWRT in a web browser. Example: **http://192.168.1.1** 
 <br/><br/>
 <img src="images/initial_view.png" alt="Logo" width="auto" height="auto" align="center">
-
+<br/>
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+	
 ### Loading more data
 Let's read values for ListValue from **example_helper** .
 <br/><br/>
@@ -240,6 +244,8 @@ return L.view.extend({
 <br/>
 
 <img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
+<br/>
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
 
 ## Custom write function
 It is possible to extend and override methods inherited from the **AbstractValue** class. Let's define custom **write** function for **MultiValue** class. <br/> Add following option to the section
@@ -323,7 +329,9 @@ To render the custom widget just pass **CBIPingAddress** as a first parameter to
   ```
 <br/>
 <img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
-
+<br/>
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+	
 ## RPC Communication
 LuCI API offers some modules to interact with backend to enable RPC (Remote Procedure Call) communication with the router and its services like **LuCI.rpc**, **LuCI.fs** and **LuCI.uci**. 
 Defining permissions for ubus methods, files, and uci configurations in a corresponding ACL (Access Control List) file is a crucial step.
@@ -363,7 +371,9 @@ This widget is uses **fs** module to read the content of a file specified by cfg
   ```
 <br/>
 <img src="images/read_file_modal.png" alt="Logo" width="auto" height="auto" align="center">
-
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<br/>
+	
 ### RPC call
 The **CBIBoardInfo** widget is used to display information about the router's hardware board, such as its hostname, model, and board name.
 
@@ -393,13 +403,18 @@ var CBIBoardInfo = form.TextValue.extend({
     }
 });
   ```
+<br/>
+
 **var boardInfo = rpc.declare({ ... });** declares a function named boardInfo. It uses the rpc.declare function to wrap the following ubus call: 
 <br/>
 <img src="images/system_boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
+<br/>
 **'params': []** indicates that the **'board'** method does not require any parameters. To call an ubus method with parameters specify their names in **params** Array as string. 
 <br/>
 <img src="images/boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
-
+<br/>
+<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+	
 ## View Control
 To save changes made to a form you need click on **Save&Apply** button. It is possible to trigger **Save&Apply** button with Vanilla JavaScript or Jquery, but it's not considered an elegant approach.
 **Save&Apply**, **Save** and **Reset** buttons are rendered by default. To remove them override **handleSaveApply**, **handleSave** and **handleReset** functions of **view** module by setting them to *null*:
@@ -420,7 +435,9 @@ return L.view.extend({
     handleReset: null
 });
 ```
-Let's customize the MultiValue:
+## Changing UCI configuration and applying changes
+Let's extend the **MultiValue** widget by appending a button that will set **multi_choice** to *'White'*, then save and apply changes:
+<br/>
   ```js
   var CBIMultiValue = form.MultiValue.extend({
     renderWidget: function (section_id, option_index, cfgvalue) {
@@ -444,12 +461,15 @@ Let's customize the MultiValue:
     }
 });
   ```
+<br/>
+The button handler function sets a configuration value, saves the changes, initializes changes using ui.changes.init, applies the changes using ui.changes.apply, and hides a modal dialog.
 
-Something about uci.save and the blablabla
 <img src="images/multivalue_set_default.png" alt="Logo" width="auto" height="auto" align="center">
 
-### Dynamic page
-You can add jquery library in header.htm in the corresponding theme folder.
+## Poll actions
+The polling loop, powered by the **LuCI.poll** class, is often used in LuCI applications to periodically check for changes in configuration settings, monitor system status, or update the user interface with real-time information.
+To create a simple example of displaying real-time updates using **poll** first define a function, which shows a current time.
+<br/>
   ```js
 function showCurrentTime() {
     var date = new Date().toLocaleString();
@@ -458,45 +478,18 @@ function showCurrentTime() {
     $('h3').html(datetimeNode)
 }
   ```
-Before calling m.render function
+<br/>
+And before calling m.render bind the **showCurrentTime** function to the current context and add it to **poll**, which will run every second. 
+<br/>
   ```js
    var pollfunction = L.bind(showCurrentTime, this);
    poll.add(pollfunction, 1);
   ```
+<br/>
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
+<br/>
+
+For more LuCI Framework Documentation: (References and HowTos)[https://github.com/openwrt/luci/wiki/Documentation]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
