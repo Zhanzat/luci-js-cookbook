@@ -29,7 +29,7 @@
       <a href="#writingapp">Writing a LuCI App</a>
       <ul>
         <li><a href="#settingup">Setting up</a></li>
-        <li><a href="#creatingaform">Creating a form</a></li>
+        <li><a href="#creating a form">Creating a form</a></li>
         <li><a href="#loadmoredata">Loading more data</a></li>
         <li><a href="#multivalue">MultiValue</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
@@ -130,7 +130,7 @@ mysite/urls.py: The URL declarations for this Django project; a “table of cont
 mysite/asgi.py: An entry-point for ASGI-compatible web servers to serve your project. See How to deploy with ASGI for more details.
 mysite/wsgi.py: An entry-point for WSGI-compatible web servers to serve your project. See How to deploy with WSGI for more details.
 
-### Creatingaform
+### Creating a form
 The following code maps the **example** configuration file
 
   ```js
