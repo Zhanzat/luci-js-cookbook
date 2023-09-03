@@ -51,7 +51,7 @@
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
 LuCI JavaScript-API renders views on the client side, resulting in accelerated performance of the Web interface and offering developers more convenient tools for web interface creation.
-This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API. Throughout this tutorial, it is recommended referring to the (API Reference)[https://openwrt.github.io/luci/jsapi/] for comprehensive details on the mentioned functions and classes.
+This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API. Throughout this tutorial, it is recommended referring to the [API Reference](https://openwrt.github.io/luci/jsapi/) for comprehensive details on the mentioned functions and classes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -489,7 +489,7 @@ And before calling m.render bind the **showCurrentTime** function to the current
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
 
-For more LuCI Framework Documentation: (References and HowTos)[https://github.com/openwrt/luci/wiki/Documentation]
+For more LuCI Framework Documentation: [References and HowTos](https://github.com/openwrt/luci/wiki/Documentation)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
