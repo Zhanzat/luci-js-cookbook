@@ -31,7 +31,7 @@
         <li><a href="#setting-up">Setting up</a></li>
         <li><a href="#creating-a-form">Creating a form</a></li>
         <li><a href="#loading-more-data">Loading more data</a></li>
-        <li><a href="#multivalue">MultiValue</a></li>
+        <li><a href="#custom-write-function">Custom write function</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
         <li><a href="#readfile">fs.read + ui.showModal</a></li>
         <li><a href="#rpc">rpc call</a></li>
@@ -243,8 +243,8 @@ return L.view.extend({
 
 <img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
 
-### MultiValue
-Add following option to the section
+### Custom write function
+It is possible to extend and override methods inherited from the **AbstractValue** class. Let's define custom **write** function for **MultiValue** class. <br/> Add following option to the section
   ```js
         o = s.option(form.MultiValue, "multi_choice", "A select multiple elements")
         choiceList.forEach(choice => o.value(choice['name']));
@@ -260,7 +260,7 @@ To save **multi_choice** option like:
   ```uci
 option multichoice 'White Red Green'
   ```
-you can overwrite the option's write function:
+you can override the option's write function like this:
   ```js
         o.write = function (section_id, value) {
             uci.set('example', section_id, 'multi_choice', value.join(' '));
