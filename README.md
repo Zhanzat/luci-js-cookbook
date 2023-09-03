@@ -32,8 +32,8 @@
         <li><a href="#creating-a-form">Creating a form</a></li>
         <li><a href="#loading-more-data">Loading more data</a></li>
         <li><a href="#custom-write-function">Custom write function</a></li>
-        <li><a href="#pingbutton">Ping button and ui.ping</a></li>
-        <li><a href="#readfile">fs.read + ui.showModal</a></li>
+        <li><a href="#custom-form-widget">Custom form widget</a></li>
+        <li><a href="#rpccommunication">RPC Communication</a></li>
         <li><a href="#rpc">rpc call</a></li>
         <li><a href="#uciset">uci set changes</a></li>
         <li><a href="#dynamicpage">Dynamic page</a></li>
@@ -46,7 +46,7 @@
 
 
 <!-- LuCI App Preview -->
-## LuCI App Preview
+# LuCI App Preview
 
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 
@@ -58,7 +58,7 @@ This tutorial will demonstrate how to create a simple LuCI form view using the J
 
 
 <!-- Prerequisites -->
-## Prerequisites
+# Prerequisites
 
 LuCI apps are typically developed for embedded Linux systems like routers, so you'll need access to such a system for testing and deployment. Here are the prerequisites and steps to get started:
   <ol>
@@ -93,9 +93,9 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
 
 
 <!-- Writing App -->
-## Writing an LuCI App
+# Writing an LuCI App
 
-### Setting up
+## Setting up
 *menu.d
 You need this file routing
 *acl.d
@@ -130,7 +130,7 @@ mysite/urls.py: The URL declarations for this Django project; a “table of cont
 mysite/asgi.py: An entry-point for ASGI-compatible web servers to serve your project. See How to deploy with ASGI for more details.
 mysite/wsgi.py: An entry-point for WSGI-compatible web servers to serve your project. See How to deploy with WSGI for more details.
 
-### Creating a form
+## Creating a form
 The following code maps the **example** configuration file
 
   ```js
@@ -243,7 +243,7 @@ return L.view.extend({
 
 <img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
 
-### Custom write function
+## Custom write function
 It is possible to extend and override methods inherited from the **AbstractValue** class. Let's define custom **write** function for **MultiValue** class. <br/> Add following option to the section
   ```js
         o = s.option(form.MultiValue, "multi_choice", "A select multiple elements")
@@ -266,12 +266,12 @@ you can override the option's write function like this:
             uci.set('example', section_id, 'multi_choice', value.join(' '));
         }
   ```
-<img src="images/multivalue.png" alt="Logo" width="auto" height="auto" align="center">
 
-### Ping button and ui.ping
-Create a  custom option value node that pings IP Address. To create new DOM Elements LuCI uses **E()** function which is alias for  [LuCI.dom.create()](https://openwrt.github.io/luci/jsapi/LuCI.dom.html#create)
+## Custom form widget
+Let's reate a  custom option value node that pings IP Address. To create new DOM Elements LuCI uses **E()** function which is alias for  [LuCI.dom.create()](https://openwrt.github.io/luci/jsapi/LuCI.dom.html#create)
+First import **ui** and **dom**  modules. 
 
-First *'require ui'*  that has pingDevice() function and also needed to create a handler function to an element. You can change a default value node by extending it:
+The following code defines a custom form widget named **CBIPingAddress** by extending the **form.Value** class. This custom widget is designed to render an input field along with a "Ping" button that allows you to test the connectivity of a network device using a given IP address or hostname:
   ```js
 var CBIPingAddress = form.Value.extend({
     renderWidget: function (section_id, option_index, cfgvalue) {
@@ -298,13 +298,29 @@ var CBIPingAddress = form.Value.extend({
     }
 });
   ```
+<ul>
+	<li>
+		
+The **renderWidget** method is defined within the CBIPingAddress class. This method is responsible for rendering the HTML representation of the custom widget.
+	</li>
+	<li>
+This line invokes the **renderWidget method of the parent class** (form.Value) using this.super(...). It passes the provided parameters to the parent method to get the initial HTML node for rendering the widget. This is a common pattern in JavaScript inheritance when you want to extend the behavior of a method defined in the parent class.
+ 	</li>
+  	<li>
+		
+To create new DOM Elements LuCI uses **E()** function which is alias for  [LuCI.dom.create()](https://openwrt.github.io/luci/jsapi/LuCI.dom.html#create)
+The function
+	</li>
+</ul>
+ 
+<br/>
 And then add CBIPingAddress to the section:
   ```js
   o = s.option(CBIPingAddress, 'some_address', 'IP-Address');
   ```
 <img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
 
-### fs.read + ui.showModal
+## RPC Communication
 first you need fs module
 
 And then create a custom option value node similar to CBIPingAddress
