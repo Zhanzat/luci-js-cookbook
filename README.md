@@ -34,9 +34,7 @@
         <li><a href="#custom-write-function">Custom write function</a></li>
         <li><a href="#custom-form-widget">Custom form widget</a></li>
         <li><a href="#rpccommunication">RPC Communication</a></li>
-        <li><a href="#rpc">rpc call</a></li>
-        <li><a href="#uciset">uci set changes</a></li>
-        <li><a href="#dynamicpage">Dynamic page</a></li>
+        <li><a href="#uciset">Work with whole page dynamic page</a></li>
       </ul>
     </li>
  
@@ -307,23 +305,29 @@ The **renderWidget** method is defined within the CBIPingAddress class. This met
 This line invokes the **renderWidget method of the parent class** (form.Value) using this.super(...). It passes the provided parameters to the parent method to get the initial HTML node for rendering the widget. This is a common pattern in JavaScript inheritance when you want to extend the behavior of a method defined in the parent class.
  	</li>
   	<li>
-		
-To create new DOM Elements LuCI uses **E()** function which is alias for  [LuCI.dom.create()](https://openwrt.github.io/luci/jsapi/LuCI.dom.html#create)
-The function
+To create new DOM Elements LuCI uses **E()** method which is alias for  [LuCI.dom.create()](https://openwrt.github.io/luci/jsapi/LuCI.dom.html#create). To create nested elements just pass another **E** method as a third parameter.
 	</li>
+   	<li>
+		
+The **L.resolveDefault()** method is a convenient way in LuCI to call methods which return a Promise,  resolving with either the given value *(ui.pingDevice('http', cfgvalue))* or with the given default *(error)* in case the input value is a rejecting promise.
+	</li>
+		
+
 </ul>
  
 <br/>
-And then add CBIPingAddress to the section:
+To render the custom widget just pass **CBIPingAddress** as a first parameter to **s.option** method:
   ```js
   o = s.option(CBIPingAddress, 'some_address', 'IP-Address');
   ```
 <img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
 
 ## RPC Communication
-first you need fs module
+LuCI API offers some modules to interact with backend to enable RPC (Remote Procedure Call) communication with the router and its services like **LuCI.rpc**, **LuCI.fs** and **LuCI.uci**. 
+Defining permissions for ubus methods, files, and uci configurations in a corresponding ACL (Access Control List) file is a crucial step.
+Note: All RPC related methods return a Promise.
 
-And then create a custom option value node similar to CBIPingAddress
+This widget is uses **fs** module to read the content of a file specified by cfgvalue and displays it in a modal dialog. 
   ```js
   var CBIReadFile = form.Value.extend({
     renderWidget: function (section_id, option_index, cfgvalue) {
@@ -355,16 +359,16 @@ And then create a custom option value node similar to CBIPingAddress
 });
   ```
 
-something about ui.ShowModal
 <img src="images/read_file_modal.png" alt="Logo" width="auto" height="auto" align="center">
 
 ### rpc call
+The **CBIBoardInfo** widget is used to display information about the router's hardware board, such as its hostname, model, and board name.
+
   ```js
   var boardInfo = rpc.declare({
     object: 'system',
     method: 'board',
-    params: [],
-    expect: {}
+    params: []
 });
 
 var CBIBoardInfo = form.TextValue.extend({
@@ -386,6 +390,9 @@ var CBIBoardInfo = form.TextValue.extend({
     }
 });
   ```
+**var boardInfo = rpc.declare({ ... });** declares a function named boardInfo. It uses the rpc.declare function to wrap the following ubus call: 
+<img src="images/system_boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
+**'params': []** indicates that the **'board'** method does not require any parameters. To call an ubus method with parameters specify their names in **params** Array as string.
 <img src="images/boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
 
 ### uci set changes
