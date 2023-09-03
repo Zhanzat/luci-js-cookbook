@@ -28,15 +28,15 @@
     <li>
       <a href="#writingapp">Writing a LuCI App</a>
       <ul>
-        <li><a href="#settingapp">Setting up</a></li>
-        <li><a href="#form">Creating a form</a></li>
-        <li><a href="#load">Loading more data</a></li>
+        <li><a href="#settingup">Setting up</a></li>
+        <li><a href="#creatingaform">Creating a form</a></li>
+        <li><a href="#loadmoredata">Loading more data</a></li>
         <li><a href="#multivalue">MultiValue</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
         <li><a href="#readfile">fs.read + ui.showModal</a></li>
         <li><a href="#rpc">rpc call</a></li>
         <li><a href="#uciset">uci set changes</a></li>
-        <li><a href="#poll">Dynamic page</a></li>
+        <li><a href="#dynamicpage">Dynamic page</a></li>
       </ul>
     </li>
  
