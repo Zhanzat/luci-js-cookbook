@@ -130,7 +130,7 @@ mysite/urls.py: The URL declarations for this Django project; a “table of cont
 mysite/asgi.py: An entry-point for ASGI-compatible web servers to serve your project. See How to deploy with ASGI for more details.
 mysite/wsgi.py: An entry-point for WSGI-compatible web servers to serve your project. See How to deploy with WSGI for more details.
 
-### Creating a form
+### Creatingaform
 The following code maps the **example** configuration file
 
   ```js
