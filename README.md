@@ -30,7 +30,7 @@
       <ul>
         <li><a href="#settingapp">Setting up</a></li>
         <li><a href="#form">Creating a form</a></li>
-        <li><a href="#listvalue">Loading more data</a></li>
+        <li><a href="#load">Loading more data</a></li>
         <li><a href="#multivalue">MultiValue</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
         <li><a href="#readfile">fs.read + ui.showModal</a></li>
