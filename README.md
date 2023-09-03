@@ -20,17 +20,17 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">LuCI App Preview</a>
+      <a href="#luci-app-preview">LuCI App Preview</a>
     </li>
     <li>
       <a href="#prerequisites">Prerequisites</a>
     </li>
     <li>
-      <a href="#writingapp">Writing a LuCI App</a>
+      <a href="#writing-a-luci-app">Writing a LuCI App</a>
       <ul>
-        <li><a href="#settingup">Setting up</a></li>
-        <li><a href="#creating a form">Creating a form</a></li>
-        <li><a href="#loadmoredata">Loading more data</a></li>
+        <li><a href="#setting-up">Setting up</a></li>
+        <li><a href="#creating-a-form">Creating a form</a></li>
+        <li><a href="#loading-more-data">Loading more data</a></li>
         <li><a href="#multivalue">MultiValue</a></li>
         <li><a href="#pingbutton">Ping button and ui.ping</a></li>
         <li><a href="#readfile">fs.read + ui.showModal</a></li>
