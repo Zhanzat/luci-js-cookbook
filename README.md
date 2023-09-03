@@ -33,8 +33,8 @@
         <li><a href="#loading-more-data">Loading more data</a></li>
         <li><a href="#custom-write-function">Custom write function</a></li>
         <li><a href="#custom-form-widget">Custom form widget</a></li>
-        <li><a href="#rpccommunication">RPC Communication</a></li>
-        <li><a href="#uciset">Work with whole page dynamic page</a></li>
+        <li><a href="#rpc-communication">RPC Communication</a></li>
+        <li><a href="#view-control">View control</a></li>
       </ul>
     </li>
  
@@ -160,7 +160,7 @@ Let's break down the code step by step:
   <ol> 	  
     <li>
 	    
-**'use strict'** is a JavaScript directive that enforces a stricter set of rules and prevents certain common programming mistakes. With strict mode, you can not, for example, use undeclared variables. [Strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 
+**'use strict'** is a JavaScript directive that enforces a stricter set of rules and prevents certain common programming mistakes. With strict mode, you can not, for example, use undeclared variables. [(Strict mode)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 
     </li> 
     <li>
     
@@ -316,10 +316,12 @@ The **L.resolveDefault()** method is a convenient way in LuCI to call methods wh
 </ul>
  
 <br/>
+
 To render the custom widget just pass **CBIPingAddress** as a first parameter to **s.option** method:
   ```js
   o = s.option(CBIPingAddress, 'some_address', 'IP-Address');
   ```
+<br/>
 <img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
 
 ## RPC Communication
@@ -327,6 +329,7 @@ LuCI API offers some modules to interact with backend to enable RPC (Remote Proc
 Defining permissions for ubus methods, files, and uci configurations in a corresponding ACL (Access Control List) file is a crucial step.
 Note: All RPC related methods return a Promise.
 
+### Reading a file
 This widget is uses **fs** module to read the content of a file specified by cfgvalue and displays it in a modal dialog. 
   ```js
   var CBIReadFile = form.Value.extend({
@@ -358,10 +361,10 @@ This widget is uses **fs** module to read the content of a file specified by cfg
     }
 });
   ```
-
+<br/>
 <img src="images/read_file_modal.png" alt="Logo" width="auto" height="auto" align="center">
 
-### rpc call
+### RPC call
 The **CBIBoardInfo** widget is used to display information about the router's hardware board, such as its hostname, model, and board name.
 
   ```js
@@ -391,12 +394,32 @@ var CBIBoardInfo = form.TextValue.extend({
 });
   ```
 **var boardInfo = rpc.declare({ ... });** declares a function named boardInfo. It uses the rpc.declare function to wrap the following ubus call: 
+<br/>
 <img src="images/system_boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
-**'params': []** indicates that the **'board'** method does not require any parameters. To call an ubus method with parameters specify their names in **params** Array as string.
+**'params': []** indicates that the **'board'** method does not require any parameters. To call an ubus method with parameters specify their names in **params** Array as string. 
+<br/>
 <img src="images/boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
 
-### uci set changes
-To save changes made to a form you need click on Save&Apply button.
+## View Control
+To save changes made to a form you need click on **Save&Apply** button. It is possible to trigger **Save&Apply** button with Vanilla JavaScript or Jquery, but it's not considered an elegant approach.
+**Save&Apply**, **Save** and **Reset** buttons are rendered by default. To remove them override **handleSaveApply**, **handleSave** and **handleReset** functions of **view** module by setting them to *null*:
+```js
+'use strict';
+'require form';
+'require uci';
+
+return L.view.extend({
+    load: function () {
+        //..
+    },
+    render: function () {   
+        //..
+    },
+    handleSaveApply: null,
+    handleSave: null,
+    handleReset: null
+});
+```
 Let's customize the MultiValue:
   ```js
   var CBIMultiValue = form.MultiValue.extend({
