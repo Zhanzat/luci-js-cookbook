@@ -53,9 +53,6 @@
 LuCI JavaScript-API renders views on the client side, resulting in accelerated performance of the Web interface and offering developers more convenient tools for web interface creation.
 This tutorial will demonstrate how to create a simple LuCI form view using the JavaScript API. Throughout this tutorial, it is recommended referring to the [API Reference](https://openwrt.github.io/luci/jsapi/) for comprehensive details on the mentioned functions and classes.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- Prerequisites -->
 # Prerequisites
@@ -89,7 +86,7 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
     </li>
   </ol>
 
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 
 
 <!-- Writing App -->
@@ -260,7 +257,7 @@ To access the LuCI web interface enter the IP address of your OpenWRT in a web b
 <br/><br/>
 <img src="images/initial_view.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 	
 ### Loading more data
 Let's read values for ListValue from **example_helper** .
@@ -301,7 +298,7 @@ return L.view.extend({
 
 <img src="images/listvalue_load.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 
 ## Custom write function
 It is possible to extend and override methods inherited from the **AbstractValue** class. Let's define custom **write** function for **MultiValue** class. <br/> Add following option to the section
@@ -386,7 +383,7 @@ To render the custom widget just pass **CBIPingAddress** as a first parameter to
 <br/>
 <img src="images/ping_btn.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 	
 ## RPC Communication
 LuCI API offers some modules to interact with backend to enable RPC (Remote Procedure Call) communication with the router and its services like **LuCI.rpc**, **LuCI.fs** and **LuCI.uci**. 
@@ -427,7 +424,7 @@ This widget is uses **fs** module to read the content of a file specified by cfg
   ```
 <br/>
 <img src="images/read_file_modal.png" alt="Logo" width="auto" height="auto" align="center">
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 <br/>
 	
 ### RPC call
@@ -486,7 +483,7 @@ root@vfc_x64:~# ubus call system board
 <br/>
 <img src="images/boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
-<p align="right">(<href="#luci-app-preview">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 	
 ## View Control
 To save changes made to a form you need click on **Save&Apply** button. It is possible to trigger **Save&Apply** button with Vanilla JavaScript or Jquery, but it's not considered an elegant approach.
@@ -536,7 +533,7 @@ Let's extend the **MultiValue** widget by appending a button that will set **mul
   ```
 <br/>
 The button handler function sets a configuration value, saves the changes, initializes changes using ui.changes.init, applies the changes using ui.changes.apply, and hides a modal dialog.
-
+<br/>
 <img src="images/multivalue_set_default.png" alt="Logo" width="auto" height="auto" align="center">
 
 ## Poll actions
@@ -552,17 +549,19 @@ function showCurrentTime() {
 }
   ```
 <br/>
+
 And before calling m.render bind the **showCurrentTime** function to the current context and add it to **poll**, which will run every second. 
 <br/>
-  ```js
+
+```js
    var pollfunction = L.bind(showCurrentTime, this);
    poll.add(pollfunction, 1);
-  ```
+```
 <br/>
 <img src="images/current_time.png" alt="Logo" width="auto" height="auto" align="center">
 <br/>
 
 For more LuCI Framework Documentation: [References and HowTos](https://github.com/openwrt/luci/wiki/Documentation)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#luci-app-preview">back to top</a>)</p>
 
