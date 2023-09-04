@@ -96,16 +96,82 @@ LuCI apps are typically developed for embedded Linux systems like routers, so yo
 # Writing an LuCI App
 
 ## Setting up
-*menu.d
-You need this file routing
-*acl.d
-We will create an App that will use two uci files and txt file
+Let's assume you want to create a new application **example**. To set up a new LuCI application you need to create 3 files:
+		
+* **example.js** file in `/www/luci-static/resources/view/` directory
+
+* **luci-app-example.json** file in `/usr/share/luci/menu.d/` directory, which registers the app in LuCI dispatching tree and defines ACL file
+
+```json
+{
+	"admin/example": {
+		"title": "Example LuCI-App",
+		"order": 10,
+		"action": {
+			"type": "firstchild",
+			"recursive": true
+		},
+			"depends": {
+			"acl": [ "luci-app-example" ],
+			"uci": { "rpcd": true }
+		}
+	},
+	"admin/example/example": {
+		"title": "Example LuCI-App",
+		"order": 10,
+		"action": {
+			"type": "view",
+			"path": "example"
+		},
+		"depends": {
+			"acl": [ "luci-app-example" ],
+			"uci": { "rpcd": true }
+		}
+	}
+}
+  ```
+
+  
+* **luci-app-example.json** file in `/usr/share/rpcd/acl.d/` directory, which defines app's permissions
+
+```json
+{
+	"luci-app-example": {
+		"description": "Grant access to Example config",
+		"read": {
+			"uci": ["example", "example_helper"],
+
+			"ubus": {
+				"system": ["*"]
+			},
+
+			"file": {
+				"/tmp/example.txt": ["read", "write", "exec"]
+			}
+		},
+
+		"write": {
+			"uci": ["example", "example_helper"]
+		}
+	}
+}
+  ```
+
+<br/>
+
+As shown in ACL file **example** app will use two UCI files and example.txt file with some text
+<br/>
+
+*1. example*
   ```uci
 config first_section
 	option some_bool '1'
 	option some_address '172.19.100.43'
 	option some_file_dir '/tmp/example.txt'
   ```
+<br/>
+
+*2. example_helper*
   ```uci
 config some_choice
 	option id '1234'
@@ -119,16 +185,6 @@ config some_choice
 	option id '4321'
 	option descr 'Blue'
   ```
-These files are:
-
-The outer mysite/ root directory is a container for your project. Its name doesn’t matter to Django; you can rename it to anything you like.
-manage.py: A command-line utility that lets you interact with this Django project in various ways. You can read all the details about manage.py in django-admin and manage.py.
-The inner mysite/ directory is the actual Python package for your project. Its name is the Python package name you’ll need to use to import anything inside it (e.g. mysite.urls).
-mysite/__init__.py: An empty file that tells Python that this directory should be considered a Python package. If you’re a Python beginner, read more about packages in the official Python docs.
-mysite/settings.py: Settings/configuration for this Django project. Django settings will tell you all about how settings work.
-mysite/urls.py: The URL declarations for this Django project; a “table of contents” of your Django-powered site. You can read more about URLs in URL dispatcher.
-mysite/asgi.py: An entry-point for ASGI-compatible web servers to serve your project. See How to deploy with ASGI for more details.
-mysite/wsgi.py: An entry-point for WSGI-compatible web servers to serve your project. See How to deploy with WSGI for more details.
 
 ## Creating a form
 The following code maps the **example** configuration file
@@ -407,7 +463,24 @@ var CBIBoardInfo = form.TextValue.extend({
 
 **var boardInfo = rpc.declare({ ... });** declares a function named boardInfo. It uses the rpc.declare function to wrap the following ubus call: 
 <br/>
-<img src="images/system_boardinfo.png" alt="Logo" width="auto" height="auto" align="center">
+```
+root@vfc_x64:~# ubus call system board
+{
+        "kernel": "5.10.134",
+        "hostname": "vfc_x64.test.lan",
+        "system": "Common KVM processor",
+        "model": "QEMU Standard PC (i440FX + PIIX, 1996)",
+        "board_name": "qemu-standard-pc-i440fx-piix-1996",
+        "rootfs_type": "squashfs",
+        "release": {
+                "distribution": "OpenMonitoring",
+                "version": "0.4.0",
+                "revision": "r19590-042d558536",
+                "target": "x86/64",
+                "description": "OpenMonitoring 0.4.0 release"
+        }
+}
+```
 <br/>
 **'params': []** indicates that the **'board'** method does not require any parameters. To call an ubus method with parameters specify their names in **params** Array as string. 
 <br/>
