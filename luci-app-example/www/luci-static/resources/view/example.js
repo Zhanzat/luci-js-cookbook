@@ -7,7 +7,7 @@
 'require rpc';
 'require poll';
 
-var boardInfo = rpc.declare({
+var callBoardInfo= rpc.declare({
     object: 'system',
     method: 'board',
     params: [],
@@ -18,7 +18,7 @@ var CBIBoardInfo = form.TextValue.extend({
     renderWidget: function (section_id, option_index, cfgvalue) {
         var node = this.super('renderWidget', [section_id, option_index, cfgvalue]);
         
-        L.resolveDefault(boardInfo(), 'unknown').then(function (result) {
+        L.resolveDefaultcallBoardInfo(), 'unknown').then(function (result) {
             console.log(result)
             var contentNode = [
                 E('p', {}, 'Hostname : ' + result['hostname']),
