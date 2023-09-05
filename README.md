@@ -431,7 +431,7 @@ This widget is uses **fs** module to read the content of a file specified by cfg
 The **CBIBoardInfo** widget is used to display information about the router's hardware board, such as its hostname, model, and board name.
 
   ```js
-  var boardInfo = rpc.declare({
+  var callBoardInfo = rpc.declare({
     object: 'system',
     method: 'board',
     params: []
@@ -441,7 +441,7 @@ var CBIBoardInfo = form.TextValue.extend({
     renderWidget: function (section_id, option_index, cfgvalue) {
         var node = this.super('renderWidget', [section_id, option_index, cfgvalue]);
         
-        L.resolveDefault(boardInfo(), 'unknown').then(function (result) {
+        L.resolveDefault(callBoardInfo(), 'unknown').then(function (result) {
             console.log(result)
             var contentNode = [
                 E('p', {}, 'Hostname : ' + result['hostname']),
